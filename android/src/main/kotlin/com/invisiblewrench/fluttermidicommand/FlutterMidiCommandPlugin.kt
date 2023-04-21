@@ -396,6 +396,7 @@ class FlutterMidiCommandPlugin : FlutterPlugin, ActivityAware, MethodCallHandler
   }
 
   private fun connectToDevice(deviceId:String, type:String) : String? {
+    Log.d("FlutterMIDICommand", "CONNECT TO DEVICE CALLED")
     Log.d("FlutterMIDICommand", "connect to $type device: $deviceId")
 
     if (type == "BLE" || type == "bonded") {
@@ -414,6 +415,7 @@ class FlutterMidiCommandPlugin : FlutterPlugin, ActivityAware, MethodCallHandler
         midiManager.openBluetoothDevice(bleDevices.first(), deviceOpenedListener, handler)
       }
     } else if (type == "native") {
+      Log.d("FlutterMIDICommand", "midiManager thing: ${midiManager.devices}")
       val devices =  midiManager.devices.filter { d -> d.id.toString() == deviceId }
       if (devices.isEmpty()) {
         Log.d("FlutterMIDICommand", "not found device $devices")
